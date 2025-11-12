@@ -1,0 +1,79 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: maroon;
+  color: gold;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 1.5rem;
+  border-bottom: 4px solid gold;
+  position: relative;
+}
+
+.title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.header h1 a {
+  color: gold;
+  text-decoration: none;
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+a {
+    color: gold;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: lightgoldenrodyellow; /* Color on hover */
+    text-decoration: underline;
+}
+
+.nav-links ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  margin-left: 1.5rem;
+}
+
+.nav-links a {
+  color: gold;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+
+.nav-links a {
+    color: gold;
+    text-decoration: none;
+    margin-left: 1rem;
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
