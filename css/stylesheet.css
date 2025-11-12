@@ -11,6 +11,24 @@
   position: relative;
 }
 
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: maroon;
+  color: gold;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 1.5rem;
+  border-top: 4px solid gold;
+  position: relative;
+}
+
+.footer .title {
+  position: absolute;
+  left: 20%;
+}
+
 .title {
   position: absolute;
   left: 50%;
