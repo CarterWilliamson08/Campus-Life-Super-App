@@ -1,3 +1,23 @@
+html, body, main {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body > *:last-child {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.header, .footer {
+    background-color: maroon;
+    padding: 10px 20px;        
+    height: 109.5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -97,7 +117,7 @@ a:hover {
 }
 
 .carousel-bg {
-    background-color: rgb(29, 25, 25); /* ← Pick your color */
+    background-color: rgb(29, 25, 25);
     padding: 25px 0;           
     width: 100%;
 }
@@ -153,4 +173,73 @@ a:hover {
 
 .right-btn {
     right: 10px;
+}
+
+.info-cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    flex-wrap: nowrap;
+}
+
+
+.card {
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    width: 30%;
+    min-width: 250px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+    text-align: center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    height: 400px;
+}
+
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+
+.card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.card h2 {
+    font-size: 1.5rem;
+    margin: 15px 0 5px 0;
+}
+
+.card p {
+    font-size: 1rem;
+    margin: 0 15px 15px 15px;
+    color: #444;
+}
+
+.card-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: gold;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.card-link:hover {
+    color: gold;
+}
+
+.card-bg {
+    border-top: 4px solid maroon;
+    background-color: rgb(29, 25, 25);
+    padding: 25px 0;           
+    width: 100%;
 }
