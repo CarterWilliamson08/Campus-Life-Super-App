@@ -1,6 +1,13 @@
+/* KEY FEATURES:
+   - Home page image carousel
+   - Dynamic event cards (Events page)
+   - Dynamic FAQ cards (FAQ page)
+   - Dynamic dining cards (Dining page)
+*/
+
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* ---------- Home Page Carousel ---------- */
+    /* ---------- HOME PAGE: CAROUSEL ---------- */
 
     const carousel = document.querySelector('.carousel');
     const images = carousel ? carousel.querySelectorAll('img') : [];
@@ -32,11 +39,10 @@ document.addEventListener("DOMContentLoaded", () => {
         setInterval(nextImage, 4000);
     }
 
-    /* ---------- EVENTS PAGE — Featured Events ---------- */
+    /* ---------- EVENTS PAGE: FEATURE CARDS ---------- */
 
     const featuresEl = document.getElementById('event-features');
 
-    // Placeholder events
     const events = [
         {
             title: "Placeholder Event Name",
@@ -58,9 +64,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     ];
 
-    // Build the featured event cards
     if (featuresEl) {
-        events.forEach((event, idx) => {
+        events.forEach((event) => {
             const card = document.createElement('div');
             card.className = 'feature-card';
 
@@ -79,7 +84,6 @@ document.addEventListener("DOMContentLoaded", () => {
             desc.className = 'feature-card-description';
             desc.textContent = event.description;
 
-            /* Actions: RSVP + Expand Button */
             const actions = document.createElement('div');
             actions.className = 'feature-actions';
 
@@ -94,7 +98,6 @@ document.addEventListener("DOMContentLoaded", () => {
             detailsBtn.className = 'btn-event';
             detailsBtn.textContent = "Show Details";
 
-            /* Expandable detail content */
             const detailsBox = document.createElement('div');
             detailsBox.className = "event-details-box";
             detailsBox.textContent = event.details;
@@ -103,8 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const isOpen = detailsBox.classList.contains("open");
 
                 if (isOpen) {
-                    // CLOSE animation
-                    detailsBox.style.maxHeight = detailsBox.scrollHeight + "px"; // set to current height to start collapse
+                    detailsBox.style.maxHeight = detailsBox.scrollHeight + "px";
                     setTimeout(() => {
                         detailsBox.classList.remove("open");
                         detailsBox.style.maxHeight = "0";
@@ -112,14 +114,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     detailsBtn.textContent = "Show Details";
                 } else {
-                    // OPEN animation
                     detailsBox.classList.add("open");
                     detailsBox.style.maxHeight = detailsBox.scrollHeight + "px";
 
                     detailsBtn.textContent = "Hide Details";
                 }
             });
-
 
             actions.appendChild(rsvpBtn);
             actions.appendChild(detailsBtn);
@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-/* ---------- FAQ PAGE — Featured FAQ Cards ---------- */
+/* ---------- FAQ PAGE: FAQ CARDS ---------- */
 
 const faqContainer = document.getElementById("faq-features");
 
@@ -195,7 +195,6 @@ if (faqContainer) {
             const isOpen = answerBox.classList.contains("open");
 
             if (isOpen) {
-                // collapse
                 answerBox.style.maxHeight = answerBox.scrollHeight + "px";
                 setTimeout(() => {
                     answerBox.classList.remove("open");
@@ -203,7 +202,6 @@ if (faqContainer) {
                 }, 10);
                 btn.textContent = "Show Answer";
             } else {
-                // expand
                 answerBox.classList.add("open");
                 answerBox.style.maxHeight = answerBox.scrollHeight + "px";
                 btn.textContent = "Hide Answer";
@@ -222,7 +220,7 @@ if (faqContainer) {
     });
 }
 
-/* ---------- DINING PAGE — Featured Meals (Simplified — No Details Button) ---------- */
+/* ---------- DINING PAGE: FEATURE CARDS ---------- */
 
 const diningContainer = document.getElementById("dining-features");
 
@@ -267,7 +265,6 @@ if (diningContainer) {
         desc.className = "feature-card-description";
         desc.textContent = item.description;
 
-        // Nutrition Info link at bottom
         const nutrition = document.createElement("a");
         nutrition.href = item.nutritionLink;
         nutrition.textContent = "Nutrition Information";
@@ -288,5 +285,3 @@ if (diningContainer) {
         diningContainer.appendChild(card);
     });
 }
-
-

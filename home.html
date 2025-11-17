@@ -1,3 +1,10 @@
+<!-- HOME PAGE — Key Features:
+     - Header with navigation
+     - Image carousel
+     - Three feature cards (Events, Dining, FAQs)
+     - Footer
+-->
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -7,16 +14,21 @@
 
         <link rel="stylesheet" href="./css/stylesheet.css"/>
         <script src="./js/script.js"></script>
-
     </head>
 
     <body>
         <div>
             <main>
-                <header  class="header">
+
+                <!-- HEADER -->
+                <header class="header">
                     <img src="./imgs/placeholder.png" alt="Campus Logo" class="logo">
-                    <div class="title"><h1><a href="./home.html">Campus Home</a></h1></div>
-                     <nav class="nav-links">
+
+                    <div class="title">
+                        <h1><a href="./home.html">Campus Home</a></h1>
+                    </div>
+
+                    <nav class="nav-links">
                         <ul>
                             <li><a href="./events.html">Events</a></li>
                             <li><a href="./dining.html">Dining</a></li>
@@ -24,22 +36,26 @@
                         </ul>
                     </nav>
                 </header>
+
+                <!-- IMAGE CAROUSEL -->
                 <section class="carousel-bg">
                     <div class="carousel-container">
-                            <button class="carousel-btn left-btn">&#10094;</button>
+                        <button class="carousel-btn left-btn">&#10094;</button>
 
-                            <div class="carousel">
-                                <img src="./imgs/placeholder.png" alt="Upcoming Event">
-                                <img src="./imgs/placeholder.png" alt="Dining Hall Meal">
-                                <img src="./imgs/placeholder.png" alt="FAQs">
-                            </div>
+                        <div class="carousel">
+                            <img src="./imgs/placeholder.png" alt="Upcoming Event">
+                            <img src="./imgs/placeholder.png" alt="Dining Hall Meal">
+                            <img src="./imgs/placeholder.png" alt="FAQs">
+                        </div>
 
-                            <button class="carousel-btn right-btn">&#10095;</button>
+                        <button class="carousel-btn right-btn">&#10095;</button>
                     </div>
                 </section>
 
+                <!-- FEATURE CARDS (Events / Dining / FAQs) -->
                 <section class="card-bg">
                     <div class="info-cards">
+
                         <div class="card">
                             <img src="./imgs/placeholder.png" alt="Events">
                             <h2>Events</h2>
@@ -60,12 +76,18 @@
                             <p>Find answers to common questions about campus life, services, and policies.</p>
                             <a href="./faq.html" class="card-link">Explore FAQs</a>
                         </div>
+
                     </div>
                 </section>
-                
+
+                <!-- FOOTER -->
                 <footer class="footer">
                     <img src="./imgs/placeholder.png" alt="Campus Logo" class="logo">
-                    <div class="title"><h3><a href="./home.html">Home</a></h3></div>
+
+                    <div class="title">
+                        <h3><a href="./home.html">Home</a></h3>
+                    </div>
+
                     <nav class="nav-links">
                         <ul>
                             <li><a href="./events.html">Events</a></li>
@@ -74,8 +96,10 @@
                         </ul>
                     </nav>
                 </footer>
+
             </main>
         </div>
+
         <script src="./js/script.js"></script>
     </body>
 </html>
