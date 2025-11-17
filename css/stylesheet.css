@@ -4,15 +4,28 @@ html, body, main {
   height: 100%;
 }
 
+/* Make main stretch to viewport height so footer sits at bottom */
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+}
+
+body > div {
+  flex: 1;
+}
+
 body > *:last-child {
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;
 }
 
+/* HEADER & FOOTER --------------------------------------------------- */
+
 .header, .footer {
     background-color: maroon;
     padding: 10px 20px;        
-    height: 109.5px;
+    height: 118.5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -61,15 +74,19 @@ body > *:last-child {
 }
 
 .header h1 a {
-  color: gold;
-  text-decoration: none;
+    color: gold;
+    text-decoration: none;
 }
+
+/* LOGO --------------------------------------------------- */
 
 .logo {
     width: 60px;
     height: 60px;
     object-fit: contain;
 }
+
+/* NAV LINKS --------------------------------------------------- */
 
 a {
     color: gold;
@@ -79,7 +96,7 @@ a {
 }
 
 a:hover {
-    color: lightgoldenrodyellow; /* Color on hover */
+    color: lightgoldenrodyellow;
     text-decoration: underline;
 }
 
@@ -101,20 +118,11 @@ a:hover {
 }
 
 .nav-links a:hover {
+  color: lightgoldenrodyellow;
   text-decoration: underline;
 }
 
-
-.nav-links a {
-    color: gold;
-    text-decoration: none;
-    margin-left: 1rem;
-    font-weight: bold;
-}
-
-.nav-links a:hover {
-    text-decoration: underline;
-}
+/* CAROUSEL --------------------------------------------------- */
 
 .carousel-bg {
     background-color: rgb(29, 25, 25);
@@ -126,7 +134,7 @@ a:hover {
     position: relative;
     width: 100%;
     max-width: 900px;
-    height: 350px;   /* FIXED HEIGHT */
+    height: 453px;
     margin: 20px auto;
     overflow: hidden;
     border-radius: 12px;
@@ -148,7 +156,6 @@ a:hover {
     object-fit: cover;
 }
 
-
 .carousel-btn {
     position: absolute;
     top: 50%;
@@ -161,6 +168,7 @@ a:hover {
     font-size: 30px;
     border-radius: 50%;
     transition: background 0.3s;
+    z-index: 10;
 }
 
 .carousel-btn:hover {
@@ -175,6 +183,8 @@ a:hover {
     right: 10px;
 }
 
+/* HOME PAGE CARDS --------------------------------------------------- */
+
 .info-cards {
     display: flex;
     flex-direction: row;
@@ -188,8 +198,10 @@ a:hover {
     flex-wrap: nowrap;
 }
 
-
 .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-color: #fff;
     border-radius: 12px;
     overflow: hidden;
@@ -197,10 +209,8 @@ a:hover {
     min-width: 250px;
     box-shadow: 0 4px 14px rgba(0,0,0,0.15);
     text-align: center;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    height: 400px;
+    padding-bottom: 20px;
 }
-
 
 .card:hover {
     transform: translateY(-6px);
@@ -219,22 +229,22 @@ a:hover {
 }
 
 .card p {
-    font-size: 1rem;
-    margin: 0 15px 15px 15px;
+    flex-grow: 1;
+    margin: 0 15px 15px;
     color: #444;
 }
 
 .card-link {
+  transition: color 0.3s;
     display: inline-block;
-    margin-bottom: 20px;
     text-decoration: none;
-    color: gold;
+    color: maroon;
     font-weight: bold;
-    transition: color 0.2s;
 }
 
 .card-link:hover {
-    color: gold;
+    color: rgb(29, 25, 25);
+    text-decoration: underline;
 }
 
 .card-bg {
@@ -243,3 +253,103 @@ a:hover {
     padding: 25px 0;           
     width: 100%;
 }
+
+/* EVENTS PAGE — SINGLE COLUMN FEATURED EVENTS ------------------------ */
+.events-bg {
+    background-color: rgb(29, 25, 25);
+    padding: 25px 0;           
+    width: 100%;
+}
+
+
+.events-single-column {
+    max-width: 900px;
+    margin: 40px auto 60px;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Featured event cards */
+
+.feature-card {
+    background: #ffffff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.feature-card img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+}
+
+.feature-card-content {
+    padding: 20px;
+}
+
+.feature-card-title {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #222;
+}
+
+.feature-card-description {
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.4rem;
+}
+
+/* Buttons inside featured cards */
+.feature-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 12px;
+}
+
+.btn-event {
+    padding: 10px 18px;
+    background-color: maroon;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.btn-event:hover {
+    background-color: #8b0000;
+}
+
+/* Expandable "details" box */
+/* Expandable "Event Details" box — SLIDE DOWN ANIMATION */
+.event-details-box {
+    margin-top: 12px;
+    padding: 0 15px;
+    background-color: #fafafa;
+    border-left: 4px solid maroon;
+    border-radius: 6px;
+    color: #444;
+    line-height: 1.4rem;
+
+    /* animation core */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+    opacity: 0;
+}
+
+.event-details-box.open {
+    padding: 15px;
+    opacity: 1;
+    max-height: 500px; /* large enough for any text */
+}
+
+
