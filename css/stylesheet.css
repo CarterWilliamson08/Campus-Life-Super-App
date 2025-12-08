@@ -1,4 +1,7 @@
 /* GLOBAL LAYOUT + RESET (page defaults) */
+
+@media (max-width: 600px)
+
 html, body, main {
   margin: 0;
   padding: 0;
