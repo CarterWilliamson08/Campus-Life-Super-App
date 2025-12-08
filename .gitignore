@@ -1,0 +1,12 @@
+# -------------------------------------
+# Ignore API key containers
+# -------------------------------------
+.env
+js/config.js
+ENV/
+env/
+node_modules/
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -62,6 +62,19 @@ document.addEventListener("DOMContentLoaded", () => {
         setInterval(nextImage, 4000);
     }
 
+    if (carousel && images.length > 0) {
+    images[0].addEventListener("click", () => {
+        window.location.href = "./events.html";
+    });
+    images[1].addEventListener("click", () => {
+        window.location.href = "./dining.html";
+    });
+    images[2].addEventListener("click", () => {
+        window.location.href = "./faq.html";
+    });
+}
+
+
     /* ---------- EVENTS PAGE: FEATURE CARDS ---------- */
 
     const featuresEl = document.getElementById('event-features');
@@ -167,22 +180,22 @@ const faqContainer = document.getElementById("faq-features");
 
 const faqs = [
     {
-        question: "Placeholder Question 1",
-        short: "Short placeholder summary of the FAQ. Replace this text later with your real question summary.",
-        details: "This is placeholder detailed text for FAQ #1. You can expand this later with the full answer, explanation, or steps.",
-        icon: "./imgs/placeholder.png"
+        question: "How do I find upcoming campus events?",
+        short: "Events are listed on Walsh’s official event calendar and student app.",
+        details: "Walsh University posts campus events on the Student App, the Campus Life webpage, and digital boards across campus. Students can browse by date, category, or location and often RSVP directly through the app for dining events, athletic games, faith-based programs, and student-life activities. Some events may require a Walsh login to view additional details or to register.",
+        icon: "./imgs/faq1.jpg"
     },
     {
-        question: "Placeholder Question 2",
-        short: "Short placeholder summary that briefly introduces the FAQ topic.",
-        details: "More placeholder details for FAQ #2. This section will expand when the user clicks to show the answer.",
-        icon: "./imgs/placeholder.png"
+        question: "Where can I get academic support or tutoring?",
+        short: "Tutoring is available through the Academic Support Center.",
+        details: "Walsh University’s Academic Support Center (ASC) offers free tutoring in subjects like math, writing, science, and computer science. Students can schedule appointments online or walk in during open hours. Additional help is available through faculty office hours and peer study groups. The ASC also provides accommodations for students registered with Accessibility Services.",
+        icon: "./imgs/faq2.png"
     },
     {
-        question: "Placeholder Question 3",
-        short: "Short placeholder description for the FAQ. This should be replaced with a real explanation later.",
-        details: "Placeholder expanded content for FAQ #3. You can enter instructions, policies, or explanations here when ready.",
-        icon: "./imgs/placeholder.png"
+        question: "How do meal plans work and where can I use them?",
+        short: "Meal plans include swipes and dining dollars usable at multiple campus locations.",
+        details: "Most Walsh meal plans include a set number of swipes for Schervish Dining Hall and CAV Cash or dining dollars for campus retail locations such as Cavaliers Café or The Dome. Swipes typically reset weekly depending on the plan, while dining dollars last the entire semester. Students can track balances in the Walsh app and add funds at any time.",
+        icon: "./imgs/faq3.jpg"
     }
 ];
 
@@ -249,22 +262,22 @@ const diningContainer = document.getElementById("dining-features");
 
 const diningItems = [
     {
-        title: "Main Course (Placeholder)",
-        description: "Short placeholder description of today's main entrée. Replace this text when ready.",
-        image: "./imgs/placeholder.png",
-        nutritionLink: "#"
+        title: "Breakfast - Pancake Bar",
+        description: "Enjoy a build-your-own pancake bar stacked with fresh toppings, syrups, and sweet breakfast favorites.",
+        image: "./imgs/pancake.png",
+        nutritionDetails: "Made to order, no nutrition info available. Customize with your favorite toppings!"
     },
     {
-        title: "Side Dish (Placeholder)",
-        description: "Short placeholder description of today's side dish. Replace this with real menu info.",
-        image: "./imgs/placeholder.png",
-        nutritionLink: "#"
+        title: "Lunch - Creole-inspired Jambalaya",
+        description: "A flavorful jambalaya dish with rice, vegetables, and your choice of protein, seasoned with traditional Creole spices.",
+        image: "./imgs/jambalaya.png",
+        nutritionDetails: "Calories: 390cal\nCarbohydrates: 57g\nTotal Fat: 11g\nSugar: 7g\nProtein: 18g"
     },
     {
-        title: "Dessert (Placeholder)",
-        description: "Short placeholder description of the featured dessert. Replace with real menu details.",
-        image: "./imgs/placeholder.png",
-        nutritionLink: "#"
+        title: "Dinner - Sweet & Sour Tofu Stir Fry",
+        description: "A delicious tofu stir fry with a tangy sweet and sour sauce, served with fresh vegetables and rice.",
+        image: "./imgs/tofu_stir_fry.jpg",
+        nutritionDetails: "Calories: 360cal\nCarbohydrates: 64g\nTotal Fat: 8g\nSugar: 20g\nProtein: 11g"
     }
 ];
 
@@ -288,19 +301,37 @@ if (diningContainer) {
         desc.className = "feature-card-description";
         desc.textContent = item.description;
 
-        const nutrition = document.createElement("a");
-        nutrition.href = item.nutritionLink;
-        nutrition.textContent = "Nutrition Information";
-        nutrition.style.display = "block";
-        nutrition.style.marginTop = "16px";
-        nutrition.style.fontWeight = "bold";
-        nutrition.style.color = "maroon";
-        nutrition.style.textDecoration = "underline";
-        nutrition.style.cursor = "pointer";
+        // Button that behaves like the Events "Show Details"
+        const nutritionBtn = document.createElement("button");
+        nutritionBtn.className = "btn-event";
+        nutritionBtn.textContent = "Nutrition Information";
+
+        const nutritionBox = document.createElement("div");
+        nutritionBox.className = "event-details-box";
+        nutritionBox.textContent = item.nutritionDetails;
+
+        nutritionBtn.addEventListener("click", () => {
+            const isOpen = nutritionBox.classList.contains("open");
+
+            if (isOpen) {
+                // smooth close (same pattern as Events/FAQ)
+                nutritionBox.style.maxHeight = nutritionBox.scrollHeight + "px";
+                setTimeout(() => {
+                    nutritionBox.classList.remove("open");
+                    nutritionBox.style.maxHeight = "0";
+                }, 10);
+                nutritionBtn.textContent = "Nutrition Information";
+            } else {
+                nutritionBox.classList.add("open");
+                nutritionBox.style.maxHeight = nutritionBox.scrollHeight + "px";
+                nutritionBtn.textContent = "Hide Nutrition Info";
+            }
+        });
 
         content.appendChild(title);
         content.appendChild(desc);
-        content.appendChild(nutrition);
+        content.appendChild(nutritionBtn);
+        content.appendChild(nutritionBox);
 
         card.appendChild(img);
         card.appendChild(content);
@@ -308,6 +339,7 @@ if (diningContainer) {
         diningContainer.appendChild(card);
     });
 }
+
 
 /* ---------- MOBILE FEATURE CARD SLIDERS (all pages) ---------- */
 
@@ -355,7 +387,7 @@ window.addEventListener('load', initFeatureSliders);
 
 
 async function loadWeather() {
-    const apiKey = "9ba2693d1088b7ce5a6f44aba03fda0a";  // your real key
+    const apiKey = OPENWEATHER_KEY;  // your real key
     const campusLat = 40.7989;  // Walsh University coordinates
     const campusLon = -81.3784;
 

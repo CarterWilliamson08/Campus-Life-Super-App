@@ -355,6 +355,7 @@ a:hover {
     overflow: hidden;
     transition: max-height 0.35s ease;
     opacity: 0;
+    white-space: pre-line;;
 }
 
 .event-details-box.open {
@@ -442,6 +443,7 @@ a:hover {
         margin-bottom: 0;
     }
 
+    
     .carousel-bg {
         margin-left: -1rem;
         margin-right: -1rem;
