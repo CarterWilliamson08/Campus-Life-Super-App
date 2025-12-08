@@ -275,18 +275,21 @@ a:hover {
     margin-bottom: 40px;
 }
 
-/* Feature sliders (desktop defaults: stacked) */
+/* Feature sliders (desktop defaults: let original layout win) */
 .feature-slider-container {
   width: 100%;
 }
 
+/* don’t define display here so .info-cards or others can control layout */
 .feature-slider {
-  display: block; /* normal stacked cards on larger screens */
+  /* no display property here */
 }
 
 .feature-btn {
   display: none; /* only show on mobile */
 }
+
+
 
 
 .feature-card img {
@@ -416,44 +419,46 @@ a:hover {
         padding: 0 1rem 1.5rem;
     }
 
-    /* MOBILE: Turn feature cards into a slider with arrows */
+    /* MOBILE: Turn feature sections into sliders with arrows */
     .feature-slider-container {
-    position: relative;
-    overflow: hidden;
+        position: relative;
+        overflow: hidden;
     }
 
     .feature-slider {
-    display: flex;
-    transition: transform 0.4s ease-in-out;
+        display: flex;
+        transition: transform 0.4s ease-in-out;
     }
 
-    .feature-card {
-    flex: 0 0 100%;
-    margin-bottom: 0; /* avoid gaps between "slides" */
+    /* each slide (card/feature-card) takes full width on mobile */
+    .feature-slider > * {
+        flex: 0 0 100%;
+        margin-bottom: 0;
     }
 
     .feature-btn {
-    display: block;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.4);
-    color: white;
-    border: none;
-    padding: 8px;
-    border-radius: 50%;
-    font-size: 22px;
-    cursor: pointer;
-    z-index: 10;
+        display: block;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.4);
+        color: white;
+        border: none;
+        padding: 8px;
+        border-radius: 50%;
+        font-size: 22px;
+        cursor: pointer;
+        z-index: 10;
     }
 
     .left-feature-btn {
-    left: 8px;
+        left: 8px;
     }
 
     .right-feature-btn {
-    right: 8px;
+        right: 8px;
     }
+
 
     }
 

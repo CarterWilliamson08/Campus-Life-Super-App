@@ -309,7 +309,7 @@ if (diningContainer) {
     });
 }
 
-/* ---------- MOBILE FEATURE CARD SLIDERS ---------- */
+/* ---------- MOBILE FEATURE CARD SLIDERS (all pages) ---------- */
 
 function initFeatureSliders() {
     const containers = document.querySelectorAll('.feature-slider-container');
@@ -317,7 +317,7 @@ function initFeatureSliders() {
 
     containers.forEach(container => {
         const track = container.querySelector('.feature-slider');
-        const cards = track ? track.querySelectorAll('.feature-card') : [];
+        const cards = track ? track.children : [];
         if (!track || cards.length <= 1) return;
 
         let index = 0;
@@ -352,4 +352,5 @@ function initFeatureSliders() {
 
 /* Run after everything (cards) is on the page */
 window.addEventListener('load', initFeatureSliders);
+
 
