@@ -387,8 +387,8 @@ window.addEventListener('load', initFeatureSliders);
 
 
 async function loadWeather() {
-    const apiKey = OPENWEATHER_KEY;  // your real key
-    const campusLat = 40.7989;  // Walsh University coordinates
+    const apiKey = OPENWEATHER_KEY;
+    const campusLat = 40.7989;
     const campusLon = -81.3784;
 
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${campusLat}&lon=${campusLon}&units=imperial&appid=${apiKey}`;
