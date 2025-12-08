@@ -2,7 +2,7 @@
 # Ignore API key containers
 # -------------------------------------
 .env
-js/config.js
+config.js
 ENV/
 env/
 node_modules/
