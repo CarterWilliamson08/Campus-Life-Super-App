@@ -1,24 +1,31 @@
-/* KEY FEATURES:
-   - Home page image carousel
-   - Dynamic event cards (Events page)
-   - Dynamic FAQ cards (FAQ page)
-   - Dynamic dining cards (Dining page)
+/* KEY FEATURES (script.js):
+   - Handles global navigation hamburger toggle for mobile views
+   - Controls the home page image carousel and click-to-navigate behavior
+   - Dynamically generates event, FAQ, and dining cards from in-memory data
+   - Initializes mobile feature card sliders on all pages
+   - Loads weather data from OpenWeather and updates the home page widget
 */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* ---------- GLOBAL NAV: HAMBURGER TOGGLE ---------- */
+    /* ---------- GLOBAL NAV: HAMBURGER TOGGLE ----------
+       Main purpose:
+       - Show/hide the main navigation menu on smaller screens
+       - Toggle the aria-expanded attribute for accessibility
+       - Optionally close the menu whenever a nav link is clicked
+    */
 
     const nav = document.querySelector('.nav-links');
     const menuToggle = document.querySelector('.menu-toggle');
 
     if (nav && menuToggle) {
         menuToggle.addEventListener('click', () => {
+            // Toggle the nav-open class to show/hide links on mobile
             const isOpen = nav.classList.toggle('nav-open');
             menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         });
 
-        // Optional: close menu after clicking a link
+        // Close the mobile menu after a link is clicked so it doesn't stay open
         nav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 if (nav.classList.contains('nav-open')) {
@@ -30,55 +37,81 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* ---------- HOME PAGE: CAROUSEL ---------- */
+    /* ---------- HOME PAGE: CAROUSEL ----------
+       Main purpose:
+       - Create a simple image carousel that automatically cycles images
+       - Allow manual navigation with previous/next buttons (if present)
+       - Make each slide clickable to navigate to a related page
+    */
 
     const carousel = document.querySelector('.carousel');
     const images = carousel ? carousel.querySelectorAll('img') : [];
     const prevBtn = document.querySelector('.left-btn');
     const nextBtn = document.querySelector('.right-btn');
 
+    // Tracks which slide index we are currently viewing
     let index = 0;
 
+    /**
+     * Move the carousel to a specific slide index by updating the translateX value.
+     */
     function showImage(i) {
         if (!carousel) return;
         carousel.style.transform = `translateX(${-i * 100}%)`;
     }
 
+    /**
+     * Advance to the next image in the carousel, looping back to the start.
+     */
     function nextImage() {
         if (images.length === 0) return;
         index = (index + 1) % images.length;
         showImage(index);
     }
 
+    /**
+     * Go back to the previous image in the carousel, wrapping around from the start.
+     */
     function prevImage() {
         if (images.length === 0) return;
         index = (index - 1 + images.length) % images.length;
         showImage(index);
     }
 
+    // Only initialize the carousel behavior if images are present on this page
     if (carousel && images.length > 0) {
+        // Optional manual navigation if buttons exist
         nextBtn?.addEventListener('click', nextImage);
         prevBtn?.addEventListener('click', prevImage);
+
+        // Automatically cycle images every 4 seconds
         setInterval(nextImage, 4000);
     }
 
+    // Add click handlers for each slide to navigate to the correct page
     if (carousel && images.length > 0) {
-    images[0].addEventListener("click", () => {
-        window.location.href = "./events.html";
-    });
-    images[1].addEventListener("click", () => {
-        window.location.href = "./dining.html";
-    });
-    images[2].addEventListener("click", () => {
-        window.location.href = "./faq.html";
-    });
-}
+        images[0].addEventListener("click", () => {
+            window.location.href = "./events.html";
+        });
+        images[1].addEventListener("click", () => {
+            window.location.href = "./dining.html";
+        });
+        images[2].addEventListener("click", () => {
+            window.location.href = "./faq.html";
+        });
+    }
 
 
-    /* ---------- EVENTS PAGE: FEATURE CARDS ---------- */
+    /* ---------- EVENTS PAGE: FEATURE CARDS ----------
+       Main purpose:
+       - Define a static list of campus events (title, description, details, image)
+       - Dynamically generate a feature-card for each event
+       - Provide RSVP and "Show Details" buttons, with a smooth-expand details panel
+    */
 
     const featuresEl = document.getElementById('event-features');
 
+    // Data model for events displayed on the Events page
     const events = [
         {
             title: "Late Night Breakfast",
@@ -100,6 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     ];
 
+    // If we are on the Events page (container exists), build the event cards
     if (featuresEl) {
         events.forEach((event) => {
             const card = document.createElement('div');
@@ -123,6 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const actions = document.createElement('div');
             actions.className = 'feature-actions';
 
+            // RSVP button simply thanks the user with an alert
             const rsvpBtn = document.createElement('button');
             rsvpBtn.className = 'btn-event';
             rsvpBtn.textContent = "RSVP";
@@ -130,6 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 alert(`Thanks for RSVPing to: ${event.title}!`);
             });
 
+            // "Show Details" button toggles an expandable info box
             const detailsBtn = document.createElement('button');
             detailsBtn.className = 'btn-event';
             detailsBtn.textContent = "Show Details";
@@ -142,6 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const isOpen = detailsBox.classList.contains("open");
 
                 if (isOpen) {
+                    // Smooth closing: set height, then collapse
                     detailsBox.style.maxHeight = detailsBox.scrollHeight + "px";
                     setTimeout(() => {
                         detailsBox.classList.remove("open");
@@ -150,6 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     detailsBtn.textContent = "Show Details";
                 } else {
+                    // Expand and show full event details
                     detailsBox.classList.add("open");
                     detailsBox.style.maxHeight = detailsBox.scrollHeight + "px";
 
@@ -172,12 +210,19 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-});
+}); // end DOMContentLoaded handler
 
-/* ---------- FAQ PAGE: FAQ CARDS ---------- */
+
+/* ---------- FAQ PAGE: FAQ CARDS ----------
+   Main purpose:
+   - Define a list of frequently asked questions and answers
+   - Dynamically build feature-card elements inside #faq-features
+   - Use a button to toggle the visibility of the full answer
+*/
 
 const faqContainer = document.getElementById("faq-features");
 
+// Data model for FAQ questions displayed on the FAQ page
 const faqs = [
     {
         question: "How do I find upcoming campus events?",
@@ -199,6 +244,7 @@ const faqs = [
     }
 ];
 
+// Only build FAQ cards if the container exists (i.e., we are on faq.html)
 if (faqContainer) {
     faqs.forEach(faq => {
         const card = document.createElement("div");
@@ -219,6 +265,7 @@ if (faqContainer) {
         desc.className = "feature-card-description";
         desc.textContent = faq.short;
 
+        // Button toggles the visible answer text below
         const btn = document.createElement("button");
         btn.className = "btn-event";
         btn.textContent = "Show Answer";
@@ -231,6 +278,7 @@ if (faqContainer) {
             const isOpen = answerBox.classList.contains("open");
 
             if (isOpen) {
+                // Smooth close animation
                 answerBox.style.maxHeight = answerBox.scrollHeight + "px";
                 setTimeout(() => {
                     answerBox.classList.remove("open");
@@ -238,6 +286,7 @@ if (faqContainer) {
                 }, 10);
                 btn.textContent = "Show Answer";
             } else {
+                // Open and show full FAQ answer
                 answerBox.classList.add("open");
                 answerBox.style.maxHeight = answerBox.scrollHeight + "px";
                 btn.textContent = "Hide Answer";
@@ -256,10 +305,17 @@ if (faqContainer) {
     });
 }
 
-/* ---------- DINING PAGE: FEATURE CARDS ---------- */
+
+/* ---------- DINING PAGE: FEATURE CARDS ----------
+   Main purpose:
+   - Provide a static list of featured dining options and their nutrition info
+   - Dynamically build a feature-card for each item inside #dining-features
+   - Allow nutrition information to expand/collapse with a button
+*/
 
 const diningContainer = document.getElementById("dining-features");
 
+// Data model for dining items displayed on the Dining page
 const diningItems = [
     {
         title: "Breakfast - Pancake Bar",
@@ -281,6 +337,7 @@ const diningItems = [
     }
 ];
 
+// Only create dining cards if this page's container exists
 if (diningContainer) {
     diningItems.forEach(item => {
         const card = document.createElement("div");
@@ -301,7 +358,7 @@ if (diningContainer) {
         desc.className = "feature-card-description";
         desc.textContent = item.description;
 
-        // Button that behaves like the Events "Show Details"
+        // Button that opens/closes nutrition details
         const nutritionBtn = document.createElement("button");
         nutritionBtn.className = "btn-event";
         nutritionBtn.textContent = "Nutrition Information";
@@ -314,7 +371,7 @@ if (diningContainer) {
             const isOpen = nutritionBox.classList.contains("open");
 
             if (isOpen) {
-                // smooth close (same pattern as Events/FAQ)
+                // Smoothly collapse the details box
                 nutritionBox.style.maxHeight = nutritionBox.scrollHeight + "px";
                 setTimeout(() => {
                     nutritionBox.classList.remove("open");
@@ -322,6 +379,7 @@ if (diningContainer) {
                 }, 10);
                 nutritionBtn.textContent = "Nutrition Information";
             } else {
+                // Expand to show full nutrition info
                 nutritionBox.classList.add("open");
                 nutritionBox.style.maxHeight = nutritionBox.scrollHeight + "px";
                 nutritionBtn.textContent = "Hide Nutrition Info";
@@ -341,10 +399,17 @@ if (diningContainer) {
 }
 
 
-/* ---------- MOBILE FEATURE CARD SLIDERS (all pages) ---------- */
+/* ---------- MOBILE FEATURE CARD SLIDERS (all pages) ----------
+   Main purpose:
+   - Turn stacked feature cards into a horizontal slider on small screens
+   - Re-use the same logic for Events, Dining, and Home feature sections
+   - Keep desktop layout unchanged (no sliding behavior)
+*/
 
 function initFeatureSliders() {
     const containers = document.querySelectorAll('.feature-slider-container');
+
+    // Helper: treat 900px and below as "mobile" for slider behavior
     const isMobile = () => window.innerWidth <= 900;
 
     containers.forEach(container => {
@@ -354,6 +419,10 @@ function initFeatureSliders() {
 
         let index = 0;
 
+        /**
+         * Calculate and apply the current slide offset.
+         * On desktop, keep everything visible without horizontal sliding.
+         */
         function update() {
             if (!isMobile()) {
                 track.style.transform = 'translateX(0)';
@@ -365,29 +434,42 @@ function initFeatureSliders() {
         const prev = container.querySelector('.left-feature-btn');
         const next = container.querySelector('.right-feature-btn');
 
+        // Move backwards one card when on mobile
         prev?.addEventListener('click', () => {
             if (!isMobile()) return;
             index = (index - 1 + cards.length) % cards.length;
             update();
         });
 
+        // Move forwards one card when on mobile
         next?.addEventListener('click', () => {
             if (!isMobile()) return;
             index = (index + 1) % cards.length;
             update();
         });
 
+        // Recalculate slider position when the window is resized
         window.addEventListener('resize', update);
         update();
     });
 }
 
-/* Run after everything (cards) is on the page */
+/* Run slider initialization after all cards have been added to the DOM */
 window.addEventListener('load', initFeatureSliders);
 
 
+/* ---------- WEATHER WIDGET (Home page) ----------
+   Main purpose:
+   - Fetch current weather for Walsh University (using campus coordinates)
+   - Use the OpenWeather API key defined in config.js (OPENWEATHER_KEY)
+   - Update the "Today's Weather" section on the home page
+*/
+
 async function loadWeather() {
+    // API key is stored in config.js and kept out of the main repo
     const apiKey = OPENWEATHER_KEY;
+
+    // Approximate location for campus (Canton, OH)
     const campusLat = 40.7989;
     const campusLon = -81.3784;
 
@@ -397,15 +479,18 @@ async function loadWeather() {
         const res = await fetch(url);
         const data = await res.json();
 
+        // Update temperature and description elements on the page
         document.getElementById("weather-temp").textContent =
             `${Math.round(data.main.temp)}°F`;
 
         document.getElementById("weather-desc").textContent =
             data.weather[0].description.replace(/\b\w/g, c => c.toUpperCase());
     } catch (err) {
+        // Fallback message if the API call fails
         document.getElementById("weather-temp").textContent = "Sorry, weather is unavailable right now!";
         console.error("Weather API error:", err);
     }
 }
 
+// Ensure weather loads when the DOM is ready (home page only uses the widget)
 document.addEventListener("DOMContentLoaded", loadWeather);

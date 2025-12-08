@@ -1,8 +1,9 @@
 <!-- HOME PAGE — Key Features:
-     - Header with navigation
-     - Image carousel
-     - Three feature cards (Events, Dining, FAQs)
-     - Footer
+     - Global header with navigation + mobile hamburger menu
+     - Image carousel linking into Events, Dining, FAQs
+     - Weather widget using OpenWeather API (via script.js + config.js)
+     - Three feature cards for Events, Dining, FAQs (with mobile slider behavior)
+     - Shared footer navigation
 -->
 
 <!DOCTYPE html>
@@ -12,6 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Campus - Home</title>
 
+        <!-- Main stylesheet shared across all pages -->
         <link rel="stylesheet" href="./css/stylesheet.css"/>
     </head>
 
@@ -19,7 +21,10 @@
         <div>
             <main>
 
-                <!-- HEADER -->
+                <!-- HEADER
+                     - Displays logo, "Campus Home" title, and primary navigation
+                     - Hamburger button is wired via JS to show/hide nav on mobile screens
+                -->
                 <header class="header">
                     <img src="./imgs/walsh_logo.png" alt="Campus Logo" class="logo">
 
@@ -27,10 +32,12 @@
                         <h1><a href="./index.html">Campus Home</a></h1>
                     </div>
 
+                    <!-- Hamburger toggle for mobile navigation -->
                     <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
                         &#9776;
                     </button>
 
+                    <!-- Global navigation: links to key sections of the app -->
                     <nav class="nav-links">
                         <ul>
                             <li><a href="./events.html">Events</a></li>
@@ -40,7 +47,11 @@
                     </nav>
                 </header>
 
-                <!-- IMAGE CAROUSEL -->
+                <!-- IMAGE CAROUSEL
+                     - Full-width rotating banner at the top of the home page
+                     - script.js advances slides automatically and makes each image clickable
+                       (Events, Dining, FAQs)
+                -->
                 <section class="carousel-bg">
                     <div class="carousel-container">
                         <div class="carousel">
@@ -51,6 +62,10 @@
                     </div>
                 </section>
 
+                <!-- WEATHER WIDGET
+                     - Weather text is populated in script.js via the loadWeather() function
+                     - Uses coordinates for campus and the OpenWeather API key from config.js
+                -->
                 <section class="weather-card">
                     <div id="weather-widget">
                         <h2>Today's Weather</h2>
@@ -59,14 +74,18 @@
                     </div>
                 </section>
 
-                <!-- FEATURE CARDS (Events / Dining / FAQs) -->
+                <!-- FEATURE CARDS (Events / Dining / FAQs)
+                     - Desktop: three side-by-side cards linking into each section
+                     - Mobile: .feature-slider-container + .feature-slider allow sliding between cards
+                -->
                 <section class="card-bg">
                     <div class="feature-slider-container">
+                        <!-- Mobile left arrow -->
                         <button class="feature-btn left-feature-btn" aria-label="Previous feature">
                             &#10094;
                         </button>
 
-                        <!-- keep your original info-cards class, but also make it the slider track -->
+                        <!-- Cards form the slider track on mobile and a row of cards on desktop -->
                         <div class="info-cards feature-slider">
 
                             <div class="card">
@@ -92,6 +111,7 @@
 
                         </div>
 
+                        <!-- Mobile right arrow -->
                         <button class="feature-btn right-feature-btn" aria-label="Next feature">
                             &#10095;
                         </button>
@@ -99,7 +119,10 @@
                 </section>
 
 
-                <!-- FOOTER -->
+                <!-- FOOTER
+                     - Uses same nav pattern as header for a consistent experience
+                     - Anchored to bottom using flexbox (see stylesheet.css)
+                -->
                 <footer class="footer">
                     <img src="./imgs/walsh_logo.png" alt="Campus Logo" class="logo">
 
@@ -118,7 +141,11 @@
 
             </main>
         </div>
+
+        <!-- config.js defines OPENWEATHER_KEY for use in script.js -->
         <script src="./js/config.js"></script>
+
+        <!-- Main behavior script: nav, carousel, sliders, weather, cards -->
         <script src="./js/script.js"></script>
     </body>
 </html>

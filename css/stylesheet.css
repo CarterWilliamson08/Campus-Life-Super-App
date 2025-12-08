@@ -1,4 +1,9 @@
-/* GLOBAL LAYOUT + RESET (page defaults) */
+/* GLOBAL LAYOUT + RESET (page defaults)
+   Main purpose:
+   - Remove default margins/padding
+   - Prevent horizontal scrolling issues
+   - Provide a dark background for the entire site
+*/
 /* GLOBAL LAYOUT + RESET (page defaults) */
 html, body {
   margin: 0;
@@ -6,12 +11,14 @@ html, body {
   overflow-x: hidden;              /* keep right-side stripe away */
 }
 
-/* Site background */
+/* Site background color shared across all pages */
 body {
   background-color: rgb(29, 25, 25);
 }
 
-/* The wrapper <div> around <main> fills the viewport */
+/* The wrapper <div> around <main> fills the viewport,
+   allowing the footer to stick to the bottom when content is short.
+*/
 body > div {
   min-height: 100vh;
   display: flex;
@@ -19,6 +26,10 @@ body > div {
   width: 100%;
 }
 
+/* Main tag flex layout:
+   - Grows to fill vertical space
+   - Stacks content vertically
+*/
 main {
   flex: 1;
   display: flex;
@@ -26,9 +37,11 @@ main {
   width: 100%;
 }
 
-
-
-/* HEADER & FOOTER STYLING */
+/* HEADER & FOOTER STYLING
+   Main purpose:
+   - Apply Walsh-like maroon/gold branding
+   - Use flexbox to position logo, title, and nav links
+*/
 .header, .footer {
     background-color: maroon;
     padding: 10px 20px;
@@ -40,8 +53,7 @@ main {
     flex-wrap: wrap;
 }
 
-
-
+/* Header: top bar with logo, title, and nav */
 .header {
   padding: 1rem 2rem;
   background-color: maroon;
@@ -52,6 +64,7 @@ main {
   position: relative;
 }
 
+/* Footer: bottom bar mirroring header style */
 .footer {
   padding: 1rem 2rem;
   background-color: maroon;
@@ -63,11 +76,15 @@ main {
   margin-top: auto;
 }
 
+/* Footer title is offset to keep layout balanced on desktop */
 .footer .title {
   position: absolute;
   left: 20%;
 }
 
+/* Title container:
+   - Centered in header/footer on larger screens
+*/
 .title {
   position: absolute;
   left: 50%;
@@ -84,14 +101,18 @@ main {
     text-decoration: none;
 }
 
-/* LOGO SIZE */
+/* LOGO SIZE
+   - Used for both header and footer logos
+*/
 .logo {
     width: 60px;
     height: 60px;
     object-fit: contain;
 }
 
-/* NAVIGATION LINKS */
+/* GLOBAL LINK STYLING
+   - Gold with hover underline to match branding
+*/
 a {
     color: gold;
     text-decoration: none;
@@ -104,6 +125,11 @@ a:hover {
     text-decoration: underline;
 }
 
+/* NAVIGATION LINKS
+   Main purpose:
+   - Horizontal list of nav items on desktop
+   - Transforms to vertical list on mobile via media queries
+*/
 .nav-links ul {
   display: flex;
   list-style: none;
@@ -111,7 +137,6 @@ a:hover {
   margin: 0;
   padding: 0;
 }
-
 
 .nav-links li {
   margin-left: 1.5rem;
@@ -122,7 +147,9 @@ a:hover {
   text-decoration: underline;
 }
 
-/* HAMBURGER BUTTON (desktop: hidden; mobile: shown via media query) */
+/* HAMBURGER BUTTON (desktop: hidden; mobile: shown via media query)
+   - JS toggles .nav-open on .nav-links when this is clicked
+*/
 .menu-toggle {
     display: none;              /* shown on small screens */
     background: none;
@@ -139,7 +166,11 @@ a:hover {
 }
 
 
-/* HOME PAGE — CAROUSEL */
+/* HOME PAGE — CAROUSEL
+   Main purpose:
+   - Full-width image banner at top of Home page
+   - Height adjusts with viewport using clamp()
+*/
 .carousel-bg {
     background-color: rgb(29, 25, 25);
     padding: 25px 0;
@@ -156,7 +187,7 @@ a:hover {
     box-shadow: none;                   /* optional: remove shadow for full-width look */
 }
 
-
+/* Track that slides left/right when JS updates transform */
 .carousel {
     display: flex;
     width: 100%;
@@ -164,6 +195,7 @@ a:hover {
     transition: transform 0.5s ease-in-out;
 }
 
+/* Each carousel image fills the container */
 .carousel img {
     width: 100%;
     height: 100%;
@@ -171,6 +203,7 @@ a:hover {
     object-fit: cover;
 }
 
+/* Optional manual carousel buttons (hidden in your current design) */
 .carousel-btn {
     position: absolute;
     top: 50%;
@@ -198,7 +231,11 @@ a:hover {
     right: 10px;
 }
 
-/* HOME PAGE — FEATURE CARDS */
+/* HOME PAGE — FEATURE CARDS
+   Main purpose:
+   - Show three cards (Events, Dining, FAQs) side by side on desktop
+   - Also used as slider track on mobile when wrapped in .feature-slider-container
+*/
 .info-cards {
     display: flex;
     justify-content: center;
@@ -208,6 +245,7 @@ a:hover {
     padding: 0 20px;
 }
 
+/* Generic card styling for home feature cards */
 .card {
     display: flex;
     flex-direction: column;
@@ -253,13 +291,17 @@ a:hover {
     text-decoration: underline;
 }
 
+/* Background behind cards section on home page */
 .card-bg {
     border-top: 4px solid maroon;
     background-color: rgb(29, 25, 25);
     padding: 25px 0;           
 }
 
-/* EVENTS / FAQ / DINING — SHARED CARD DESIGN */
+/* EVENTS / FAQ / DINING — SHARED CARD DESIGN
+   Main purpose:
+   - Reusable styling for feature cards on each inner page
+*/
 .events-bg {
     background-color: rgb(29, 25, 25);
     padding: 25px 0;
@@ -273,6 +315,7 @@ a:hover {
     flex-direction: column;
 }
 
+/* Base card style for Events, FAQs, and Dining items */
 .feature-card {
     background: #ffffff;
     border-radius: 14px;
@@ -284,20 +327,19 @@ a:hover {
     margin-bottom: 40px;
 }
 
-/* Feature sliders (desktop defaults: let original layout win) */
+/* Feature sliders (desktop defaults: let original layout win)
+   - Container will be enhanced on mobile for sliding behavior
+*/
 .feature-slider-container {
   width: 100%;
 }
 
 /* don’t define display here so .info-cards or others can control layout */
-
 .feature-btn {
   display: none; /* only show on mobile */
 }
 
-
-
-
+/* Image at the top of each feature card */
 .feature-card img {
     width: 100%;
     height: 240px;
@@ -320,7 +362,9 @@ a:hover {
     line-height: 1.4rem;
 }
 
-/* BUTTONS INSIDE FEATURE CARDS */
+/* BUTTONS INSIDE FEATURE CARDS
+   - Used for RSVP, Show Details, Show Answer, Nutrition Info, etc.
+*/
 .feature-actions {
     margin-top: 15px;
     display: flex;
@@ -342,7 +386,12 @@ a:hover {
     background-color: #8b0000;
 }
 
-/* EXPANDABLE DETAILS BOX (used in Events + FAQs) */
+/* EXPANDABLE DETAILS BOX (used in Events + FAQs + Dining)
+   Main purpose:
+   - Hidden by default with max-height: 0
+   - Smoothly expands/collapses using transitions
+   - white-space: pre-line lets nutrition text respect \n line breaks
+*/
 .event-details-box {
     margin-top: 12px;
     padding: 0 15px;
@@ -366,6 +415,9 @@ a:hover {
 
 /* =========================================
    RESPONSIVE NAV + LAYOUT (TABLET & PHONE)
+   Main purpose:
+   - Switch nav to a hamburger-driven vertical menu on small screens
+   - Convert feature card sections into horizontal sliders on mobile
    ========================================= */
 @media (max-width: 900px) {
 
@@ -426,7 +478,10 @@ a:hover {
         padding: 0 1rem 1.5rem;
     }
 
-    /* MOBILE: Turn feature sections into sliders with arrows */
+    /* MOBILE: Turn feature sections into sliders with arrows
+       - .feature-slider becomes a horizontal track
+       - Each card takes up 100% width of the viewport
+    */
     .feature-slider-container {
         position: relative;
         overflow: hidden;
@@ -443,12 +498,13 @@ a:hover {
         margin-bottom: 0;
     }
 
-    
+    /* Let the carousel bleed edge-to-edge inside page padding */
     .carousel-bg {
         margin-left: -1rem;
         margin-right: -1rem;
     }
 
+    /* Slider navigation buttons for mobile */
     .feature-btn {
         display: block;
         position: absolute;
@@ -474,8 +530,7 @@ a:hover {
 
 }
 
-    
-
+/* Extra-small devices: slightly smaller fonts and controls */
 @media (max-width: 600px) {
     body {
         font-size: 14px;
@@ -495,6 +550,10 @@ a:hover {
     }
 }
 
+/* WEATHER CARD
+   Main purpose:
+   - Simple card to display current weather fetched from script.js
+*/
 .weather-card {
     background-color: #fff;
     margin: 20px auto;
