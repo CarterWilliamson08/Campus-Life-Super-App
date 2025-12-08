@@ -1,6 +1,33 @@
 /* GLOBAL LAYOUT + RESET (page defaults) */
 
-@media (max-width: 600px)
+@media (max-width: 600px) {
+    .nav-links ul {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links li {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    .header, .footer {
+        flex-direction: column;
+        height: auto;
+        text-align: center;
+    }
+
+    .footer .title {
+        position: static;
+        margin-top: 10px;
+    }
+
+    .title {
+        position: static;
+        transform: none;
+        margin-bottom: 10px;
+    }
+}
 
 html, body, main {
   margin: 0;
