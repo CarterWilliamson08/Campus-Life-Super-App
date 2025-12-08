@@ -68,22 +68,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const events = [
         {
-            title: "Placeholder Event Name",
-            description: "Short placeholder description of event. Replace this later with real text when you add actual events.",
-            details: "This is an extended detail section that can include event schedule, additional info, rules, contact info, etc.",
-            image: "./imgs/placeholder.png"
+            title: "Late Night Breakfast",
+            description: "Late Night Breakfast is back for finals week! Take a break from studying and join us for food, games, and fun. Connect with friends and recharge at this campus favorite tradition.",
+            details: "December 9, 2025 | 9:00pm - 10:30pm | Schervish Dining Hall",
+            image: "./imgs/late_night_breakfast.jpg"
         },
         {
-            title: "Placeholder Event Name",
-            description: "Short placeholder description of event. Replace this later with real text when you add actual events.",
-            details: "Additional information about this placeholder event. This will expand when the user clicks the details button.",
-            image: "./imgs/placeholder.png"
+            title: "Chorale and Handbell Choir Christmas Concert",
+            description: "Annual sacred music celebration of Lessons and Carols featuring the Walsh University Chorale and Handbell Choir.",
+            details: "December 05, 2025 | 7:00 PM - 9:00 PM | Our Lady of Perpetual Help Chapel",
+            image: "./imgs/choir.jpg"
         },
         {
-            title: "Placeholder Event Name",
-            description: "Short placeholder description of event. Replace this later with real text when you add actual events.",
-            details: "More placeholder details to demonstrate expandable content. Works smoothly across all cards.",
-            image: "./imgs/placeholder.png"
+            title: "Angel in the Rubble: An Evening with Genelle Guzman-McMillan",
+            description: "Join us for an inspiring evening with Genelle Guzman-McMillan as she shares her powerful story of surviving 27 hours beneath the rubble and rediscovering faith, followed by a reception and book signing of Angel in the Rubble.",
+            details: "December 02, 2025 | 06:30 PM - 08:30 PM | Cecchini Center Auxiliary Gym",
+            image: "./imgs/genelle.webp"
         }
     ];
 
@@ -355,8 +355,8 @@ window.addEventListener('load', initFeatureSliders);
 
 
 async function loadWeather() {
-    const apiKey = "9ba2693d1088b7ce5a6f44aba03fda0a";
-    const campusLat = 40.7989;  // Walsh University (North Canton)
+    const apiKey = "9ba2693d1088b7ce5a6f44aba03fda0a";  // your real key
+    const campusLat = 40.7989;  // Walsh University coordinates
     const campusLon = -81.3784;
 
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${campusLat}&lon=${campusLon}&units=imperial&appid=${apiKey}`;
@@ -367,12 +367,12 @@ async function loadWeather() {
 
         document.getElementById("weather-temp").textContent =
             `${Math.round(data.main.temp)}°F`;
+
         document.getElementById("weather-desc").textContent =
-            data.weather[0].description.toUpperCase();
+            data.weather[0].description.replace(/\b\w/g, c => c.toUpperCase());
     } catch (err) {
-        document.getElementById("weather-temp").textContent = "Sorry, weather isn't available right now!";
-        document.getElementById("weather-desc").textContent = "";
-        console.error("Weather fetch failed:", err);
+        document.getElementById("weather-temp").textContent = "Sorry, weather is unavailable right now!";
+        console.error("Weather API error:", err);
     }
 }
 
