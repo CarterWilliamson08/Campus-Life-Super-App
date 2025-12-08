@@ -1,24 +1,29 @@
 /* GLOBAL LAYOUT + RESET (page defaults) */
-html, body, main {
+/* GLOBAL LAYOUT + RESET (page defaults) */
+html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
+  overflow-x: hidden;              /* keep right-side stripe away */
 }
 
+/* Site background */
 body {
+  background-color: rgb(29, 25, 25);
+}
+
+/* The wrapper <div> around <main> fills the viewport */
+body > div {
+  min-height: 100vh;
+  display: flex;
+}
+
+/* <main> becomes a flex column that can push footer down */
+main {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  background-color: #f5f5f5;
 }
 
-body > div {
-  flex: 1;
-}
-
-body > *:last-child {
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
-}
 
 /* HEADER & FOOTER STYLING */
 .header, .footer {
@@ -52,6 +57,7 @@ body > *:last-child {
   font-size: 1.5rem;
   border-top: 4px solid gold;
   position: relative;
+  margin-top: auto;
 }
 
 .footer .title {
@@ -133,20 +139,20 @@ a:hover {
 /* HOME PAGE — CAROUSEL */
 .carousel-bg {
     background-color: rgb(29, 25, 25);
-    padding: 25px 0;           
+    padding: 25px 0;
     width: 100%;
 }
 
 .carousel-container {
     position: relative;
     width: 100%;
-    max-width: 900px;
-    height: 453px;
-    margin: 20px auto;
+    height: clamp(220px, 45vh, 520px);  /* responsive height */
+    margin: 0;                          /* no side margins */
     overflow: hidden;
-    border-radius: 12px;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.25);
+    border-radius: 0;                   /* optional: full-bleed edges */
+    box-shadow: none;                   /* optional: remove shadow for full-width look */
 }
+
 
 .carousel {
     display: flex;
@@ -281,9 +287,6 @@ a:hover {
 }
 
 /* don’t define display here so .info-cards or others can control layout */
-.feature-slider {
-  /* no display property here */
-}
 
 .feature-btn {
   display: none; /* only show on mobile */
@@ -436,6 +439,11 @@ a:hover {
         margin-bottom: 0;
     }
 
+    .carousel-bg {
+        margin-left: -1rem;
+        margin-right: -1rem;
+    }
+
     .feature-btn {
         display: block;
         position: absolute;
@@ -459,8 +467,9 @@ a:hover {
         right: 8px;
     }
 
+}
 
-    }
+    
 
 @media (max-width: 600px) {
     body {
