@@ -7,6 +7,29 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
+    /* ---------- GLOBAL NAV: HAMBURGER TOGGLE ---------- */
+
+    const nav = document.querySelector('.nav-links');
+    const menuToggle = document.querySelector('.menu-toggle');
+
+    if (nav && menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            const isOpen = nav.classList.toggle('nav-open');
+            menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        // Optional: close menu after clicking a link
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (nav.classList.contains('nav-open')) {
+                    nav.classList.remove('nav-open');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    }
+
+
     /* ---------- HOME PAGE: CAROUSEL ---------- */
 
     const carousel = document.querySelector('.carousel');
