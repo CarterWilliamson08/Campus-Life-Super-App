@@ -308,3 +308,48 @@ if (diningContainer) {
         diningContainer.appendChild(card);
     });
 }
+
+/* ---------- MOBILE FEATURE CARD SLIDERS ---------- */
+
+function initFeatureSliders() {
+    const containers = document.querySelectorAll('.feature-slider-container');
+    const isMobile = () => window.innerWidth <= 900;
+
+    containers.forEach(container => {
+        const track = container.querySelector('.feature-slider');
+        const cards = track ? track.querySelectorAll('.feature-card') : [];
+        if (!track || cards.length <= 1) return;
+
+        let index = 0;
+
+        function update() {
+            if (!isMobile()) {
+                track.style.transform = 'translateX(0)';
+                return;
+            }
+            track.style.transform = `translateX(${-index * 100}%)`;
+        }
+
+        const prev = container.querySelector('.left-feature-btn');
+        const next = container.querySelector('.right-feature-btn');
+
+        prev?.addEventListener('click', () => {
+            if (!isMobile()) return;
+            index = (index - 1 + cards.length) % cards.length;
+            update();
+        });
+
+        next?.addEventListener('click', () => {
+            if (!isMobile()) return;
+            index = (index + 1) % cards.length;
+            update();
+        });
+
+        window.addEventListener('resize', update);
+        update();
+    });
+}
+
+/* Run after everything (cards) is on the page */
+window.addEventListener('load', initFeatureSliders);
+
