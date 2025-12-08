@@ -354,3 +354,26 @@ function initFeatureSliders() {
 window.addEventListener('load', initFeatureSliders);
 
 
+async function loadWeather() {
+    const apiKey = "9ba2693d1088b7ce5a6f44aba03fda0a";
+    const campusLat = 40.7989;  // Walsh University (North Canton)
+    const campusLon = -81.3784;
+
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${campusLat}&lon=${campusLon}&units=imperial&appid=${apiKey}`;
+
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+
+        document.getElementById("weather-temp").textContent =
+            `${Math.round(data.main.temp)}°F`;
+        document.getElementById("weather-desc").textContent =
+            data.weather[0].description.toUpperCase();
+    } catch (err) {
+        document.getElementById("weather-temp").textContent = "Sorry, weather isn't available right now!";
+        document.getElementById("weather-desc").textContent = "";
+        console.error("Weather fetch failed:", err);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", loadWeather);
